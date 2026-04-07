@@ -1,12 +1,15 @@
 
+import { useContext} from 'react';
 import { FaRegStar } from 'react-icons/fa';
 import { useLoaderData, useParams } from 'react-router';
+import { BookContext } from '../../context/BookContext';
 const BookDetails = () => {
     const {booksId} =useParams();
     const books = useLoaderData();
     const expectedBook = books.find(book=>book.bookId === Number(booksId))
-   const {bookId,bookName,author,image,review,totalPages,rating,category,tags,publisher,yearOfPublishing} = expectedBook    
-    return (
+   const {bookName,author,image,review,totalPages,rating,category,tags,publisher,yearOfPublishing} = expectedBook    
+   const {handleMarkAsRead,handleWishList} = useContext(BookContext);
+   return (
         <div className="grid grid-cols-2 bg-base-100 shadow-sm container mx-auto my-8">
   <figure className='flex justify-center items-center bg-gray-50 rounded-2xl '>
     <img
@@ -35,8 +38,8 @@ const BookDetails = () => {
            <div className="flex items-center gap-2">{rating} <FaRegStar /></div>
         </div>
         <div className='flex items-center gap-2'>
-            <button className="btn ">Mark as Read</button>
-            <button className="btn ">Add to Wishlist</button>
+            <button onClick={()=>handleMarkAsRead(expectedBook)} className="btn ">Mark as Read</button>
+            <button onClick={()=>handleWishList(expectedBook)} className="btn ">Add to Wishlist</button>
         </div>
     </div>
   </div>
