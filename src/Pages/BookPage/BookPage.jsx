@@ -1,15 +1,26 @@
-import React, { useContext } from 'react';
-import { BookContext } from '../../context/BookContext';
-
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import ListedReadList from '../../components/homepage/ListedBooks/ListedReadList';
+import ListedWishList from '../../components/homepage/ListedBooks/ListedWishList';
 const BookPage = () => {
-     const {storedBooks} = useContext(BookContext);
-     console.log(storedBooks);
-     
-    return (
-        <div>
-           Listed Books
-        </div>
-    );
+
+return (
+<div className='container mx-auto my-3'>
+    <Tabs>
+        <TabList>
+            <Tab>Read List</Tab>
+            <Tab>Wish List</Tab>
+        </TabList>
+
+        <TabPanel>
+           <ListedReadList/>
+        </TabPanel>
+        <TabPanel>
+            <ListedWishList/>
+        </TabPanel>
+    </Tabs>
+</div>
+);
 };
 
 export default BookPage;
